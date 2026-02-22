@@ -11,6 +11,14 @@ fn sub_nums(n1: i32, n2: i32) -> i32 {
     n1 - n2
 }
 
+fn mul_nums(n1: i32, n2: i32) -> i32 {
+    n1 * n2
+}
+
+fn div_nums(n1: i32, n2: i32) -> i32 {
+    n1 / n2
+}
+
 fn main() -> std::io::Result<()> {
     let mut input = String::new();
     let message: String = String::from("Enter Command: ");
@@ -45,6 +53,8 @@ fn main() -> std::io::Result<()> {
             stdin().read_line(&mut option).unwrap();
             let is_add: bool = option == "+";
             let is_sub: bool = option == "-";
+            let is_mul: bool = option == "*";
+            let is_div: bool = option == "/";
 
             if is_add {
                 let num_1 = get_random_guess(5) as i32;
@@ -70,6 +80,34 @@ fn main() -> std::io::Result<()> {
                 let num_answer = answer.trim().parse::<i32>().unwrap();
 
                 if num_answer == sub_nums(num_1, num_2) {
+                    println!("{}", "You are | Correct Answer")
+                }
+            }
+
+            if is_mul {
+                let num_1 = get_random_guess(5) as i32;
+                let num_2 = get_random_guess(10) as i32;
+
+                let mut answer = String::new();
+                stdin().read_line(&mut answer).unwrap();
+
+                let num_answer = answer.trim().parse::<i32>().unwrap();
+
+                if num_answer == mul_nums(num_1, num_2) {
+                    println!("{}", "You are | Correct Answer")
+                }
+            }
+
+            if is_div {
+                let num_1 = get_random_guess(5) as i32;
+                let num_2 = get_random_guess(10) as i32;
+
+                let mut answer = String::new();
+                stdin().read_line(&mut answer).unwrap();
+
+                let num_answer = answer.trim().parse::<i32>().unwrap();
+
+                if num_answer == div_nums(num_1, num_2) {
                     println!("{}", "You are | Correct Answer")
                 }
             }
