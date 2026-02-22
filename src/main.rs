@@ -1,6 +1,9 @@
-use std::io::stdin;
+use std::{
+    fs::File,
+    io::{BufWriter, Write, stdin},
+};
 
-fn main() {
+fn main() -> std::io::Result<()> {
     let mut input = String::new();
     let message: String = String::from("Enter Command: ");
     let mut guess_input = String::new();
@@ -19,6 +22,10 @@ fn main() {
             if num_guess == guess {
                 println!("{}", "Correct The Guessed Number");
             } else if num_guess != guess {
+                let file = File::create("Guess.txt")?;
+
+                let mut buff = BufWriter::new(file);
+                writeln!(buff, "{}", guess)?;
                 println!("Correct Guess was: {} ", guess);
             }
         }
@@ -27,6 +34,7 @@ fn main() {
 
         _ => println!("{}", "Default Value"),
     }
+    Ok(())
 }
 
 fn get_random_guess(num1: i32) -> i32 {
