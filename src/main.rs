@@ -3,6 +3,14 @@ use std::{
     io::{BufWriter, Write, stdin},
 };
 
+fn add_nums(n1: i32, n2: i32) -> i32 {
+    n1 + n2
+}
+
+fn sub_nums(n1: i32, n2: i32) -> i32 {
+    n1 - n2
+}
+
 fn main() -> std::io::Result<()> {
     let mut input = String::new();
     let message: String = String::from("Enter Command: ");
@@ -30,7 +38,42 @@ fn main() -> std::io::Result<()> {
             }
         }
 
-        "/Math" => {}
+        "/Math" => {
+            let mut option = String::new();
+
+            println!("{}", "Enter Option: ");
+            stdin().read_line(&mut option).unwrap();
+            let is_add: bool = option == "+";
+            let is_sub: bool = option == "-";
+
+            if is_add {
+                let num_1 = get_random_guess(5) as i32;
+                let num_2 = get_random_guess(10) as i32;
+
+                let mut answer = String::new();
+                stdin().read_line(&mut answer).unwrap();
+
+                let num_answer = answer.trim().parse::<i32>().unwrap();
+
+                if num_answer == add_nums(num_1, num_2) {
+                    println!("{}", "You are | Correct Answer")
+                }
+            }
+
+            if is_sub {
+                let num_1 = get_random_guess(5) as i32;
+                let num_2 = get_random_guess(10) as i32;
+
+                let mut answer = String::new();
+                stdin().read_line(&mut answer).unwrap();
+
+                let num_answer = answer.trim().parse::<i32>().unwrap();
+
+                if num_answer == sub_nums(num_1, num_2) {
+                    println!("{}", "You are | Correct Answer")
+                }
+            }
+        }
 
         _ => println!("{}", "Default Value"),
     }
